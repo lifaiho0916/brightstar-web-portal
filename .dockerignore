@@ -1,0 +1,9 @@
+# ignore
+.idea/*
+.git/*
+
+# Mac DS_Store Files
+.DS_Store
+
+# ignore and whitelist
+README.md
