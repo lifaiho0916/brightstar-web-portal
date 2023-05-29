@@ -68,7 +68,10 @@ class FileHandler extends BaseHandler
      */
     public function handle($level, $message): bool
     {
-        $filepath = $this->path . 'log-' . date('Y-m-d') . '.' . $this->fileExtension;
+        // CODEMOD
+        // $filepath = $this->path . 'log-' . date('Y-m-d') . '.' . $this->fileExtension;
+        // make sure we write to php://stdout in docker environment
+        $filepath = 'php://stdout';
 
         $msg = '';
 
@@ -113,9 +116,10 @@ class FileHandler extends BaseHandler
         flock($fp, LOCK_UN);
         fclose($fp);
 
-        if (isset($newfile) && $newfile === true) {
-            chmod($filepath, $this->filePermissions);
-        }
+        // CODEMOD
+        // if (isset($newfile) && $newfile === true) {
+        //     chmod($filepath, $this->filePermissions);
+        // }
 
         return is_int($result);
     }

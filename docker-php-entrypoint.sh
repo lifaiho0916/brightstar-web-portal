@@ -10,6 +10,6 @@ fi
 # https://github.com/GoogleCloudPlatform/gcsfuse/blob/master/docs/mounting.md
 gcsfuse -o allow_other --uid=$_USER_ID --gid=$_USER_ID \
     --implicit-dirs --stat-cache-capacity=1000000 --max-conns-per-host=1000 \
-    --only-dir=public $MOUNT_BUCKET ./public
+    --only-dir=uploads $MOUNT_BUCKET ./public/uploads
 
 exec "$@"

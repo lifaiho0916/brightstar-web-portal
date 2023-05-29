@@ -91,7 +91,7 @@ class AppController extends BaseController
         $decoded_string = base64_decode($encoded_string);
         
         $filename = $id.'_'.date('Ymd').'_'.date('His').'.png';
-        $filepath = 'uploads/mobile_app/images/driver/'.$filename;
+        $filepath = '../public/uploads/mobile_app/images/driver/'.$filename;
         
         if (file_put_contents($filepath, $decoded_string)) {
             $result = $this->db->query("UPDATE bs_staffs SET picture = '$filename' WHERE id = '$id'");
@@ -482,7 +482,7 @@ class AppController extends BaseController
             $type = $split[1]; 
             
             $filename = date('Ymd').'_'.date('his').'_'.$shipment_id.'('.$i.').'.$type;
-            $filepath = 'uploads/mobile_app/images/shipment/'.$filename;
+            $filepath = '../public/uploads/mobile_app/images/shipment/'.$filename;
     
             if (file_put_contents($filepath, $decoded_string)) {
                 array_push($filename_arr, $filename);

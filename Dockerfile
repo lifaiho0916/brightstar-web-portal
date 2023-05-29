@@ -3,7 +3,7 @@ FROM php:8.0.2-apache
 
 # Cloud Storage mount config
 ENV MOUNT_BUCKET=brightstar-driver-static
-ENV _USER_ID=70
+ENV _USER_ID=33
 
 # Install required system packages
 RUN apt-get update
@@ -27,10 +27,8 @@ COPY --chown=www-data:www-data ./ /var/www/html/
 # Set the working directory
 WORKDIR /var/www/html/
 
-RUN set -eux; \
-# allow writable to public
-    ln -sf /var/www/html/public/logs/test.html /var/www/html/writable/logs/test.html && \
-    ln -sf /var/www/html/public/logs/log-2023-05-13.log /var/www/html/writable/logs/log-2023-05-13.log
+# set write permission for uploads
+RUN find . -path "./public/uploads/*" -type d -exec chmod 755 {} \;
 
 # PHP configs
 COPY docker-apache.conf /etc/apache2/sites-available/000-default.conf
